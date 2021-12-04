@@ -1,10 +1,15 @@
 <?php
 
+require '../php-oop-2/generalFunction.php';
+include 'Creditcard.php';
 
 class User {
     public $userName = "";
     public $password = "";
     public $email ="";
+    public $sconto = "";
+    public $paymentMethod = array();
+    
 
     function __construct($_userName, $_password, $_email){
         $this -> setUserName($_userName);
@@ -24,7 +29,7 @@ class User {
     }
 
     public function setPassword($newPassword) {
-        include 'generalFunction.php';
+        
         if (is_null($newPassword) || is_numeric($newPassword) || strlen($newPassword) < 8 || checkSpecialCar($newPassword) === "false" ) {
             exit ("Errore nell'impostazione della password");
         }
@@ -80,11 +85,11 @@ class User {
     public function getEmail(){
         return $this -> email;
     }
+
+    public function getPaymentMethod(){
+        return $this -> paymentMethod;
+    }
 }
-
-$newUser = new User("shikanto", "shikanto1992=", "shikanto@gmail.it");
-
-echo $newUser -> getEmail();
 
 
 
