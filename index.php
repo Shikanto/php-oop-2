@@ -2,6 +2,7 @@
 
 require "./classes/User.php";
 require "./classes/Premium.php";
+require __DIR__  . "/classes/Products.php";
 
 
 $newUser = new User("shikanto", "shikanto1992=", "shikanto@gmail.it");
@@ -48,4 +49,32 @@ $newCard -> addCreditCard($newCard2 -> getInfoCreditCard());
 var_dump($newCard -> getPaymentMethod());
 
 
+/****************  CHECKIGN FUNCTIONS PRODUCTS *****************/
+
+
+$newProduct = new Products();
+$newProduct -> setImgProduct("rufy.jpg");
+$newProduct -> setNameProduct("RufyKing");
+$newProduct -> setPriceProduct("12");
+$newProduct -> setDescriptionProduct("Lorem ipsum dolor sit amet consectetur 
+adipisicing elit. Veniam dignissimos vel suscipit sequi sint nisi. Dicta nobis 
+corrupti quia iste consequuntur obcaecati, officia quos necessitatibus sed eveniet. 
+Excepturi, rerum itaque.");
+echo $newProduct -> getNameProduct() . "<br>";
+echo $newProduct -> getPriceProduct() . "<br>";
+echo $newProduct -> getDescriptionProduct() . "<br>";
+
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testing</title>
+</head>
+<body>
+    <img style="width: 150px; height:150px;" src="<?php echo $newProduct -> getImgProduct(); ?>" alt="">
+</body>
+</html>
