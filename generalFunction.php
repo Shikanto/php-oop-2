@@ -1,6 +1,6 @@
 <?php
     
-    function checkSPecialCar($stringToCheck){
+    function checkSpecialCar($stringToCheck){
         $specialCar = ["!", "?", "_", "-", "(", ")","="];
         $check = "false";
         foreach ($specialCar as $car) {
@@ -46,6 +46,13 @@
             } 
         }
         return $check; 
+    }
+
+    function checkString($string){
+        if(strlen($string) <4 || empty(trim($string)) || is_numeric($string) || is_null($string)) { 
+            exit("Valore non valido");
+        }
+        return true;
     }
 
 ?>
