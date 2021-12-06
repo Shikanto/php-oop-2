@@ -1,6 +1,6 @@
 <?php
 
-require '../php-oop-2/generalFunction.php';
+include __DIR__ . "/../generalFunction.php";
 include 'Creditcard.php';
 
 class User {
@@ -22,9 +22,7 @@ class User {
 /****************** FUNZIONI SET ****************/
 
     public function setUserName($newUserName) {
-        if (is_null($newUserName) || is_numeric($newUserName) || strlen($newUserName) < 6) { 
-            exit("Username non valido");
-        }
+        checkString($newUserName);
         $this -> userName = $newUserName;
     }
 
