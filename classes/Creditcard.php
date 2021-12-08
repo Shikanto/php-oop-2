@@ -2,8 +2,8 @@
 
 class Creditcard extends User{
  
-    public $numberCard = "";
-    public $expireDate = "";
+    protected $numberCard = "";
+    protected $expireDate = "";
     
     
 

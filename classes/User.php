@@ -4,11 +4,11 @@ include __DIR__ . "/../generalFunction.php";
 include 'Creditcard.php';
 
 class User {
-    public $userName = "";
-    public $password = "";
-    public $email ="";
-    public $sconto = "";
-    public $paymentMethod = array();
+    private $userName = "";
+    protected $password = "";
+    private $email ="";
+    private $sconto = "";
+    protected $paymentMethod = array();
     
 
     function __construct($_userName, $_password, $_email){
