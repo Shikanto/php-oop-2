@@ -1,8 +1,9 @@
 <?php
 
-require "./classes/User.php";
-require "./classes/Premium.php";
-require __DIR__  . "/classes/Products.php";
+require_once __DIR__ . "./classes/User.php";
+require_once __DIR__ . "./classes/Premium.php";
+require_once __DIR__  . "/classes/Products.php";
+require_once __DIR__ . "/classes/Creditcard.php";
 
 
 $newUser = new User("shikanto", "shikanto1992=", "shikanto@gmail.it");
