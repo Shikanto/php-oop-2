@@ -1,6 +1,4 @@
 <?php
-
-
     class Products {
         
         use GeneralFunction; 
