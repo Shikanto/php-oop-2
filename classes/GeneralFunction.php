@@ -1,6 +1,8 @@
 <?php
+
+trait GeneralFunction {
     
-    function checkSpecialCar($stringToCheck){
+    public function checkSpecialCar($stringToCheck){
         $specialCar = ["!", "?", "_", "-", "(", ")","="];
         $check = "false";
         foreach ($specialCar as $car) {
@@ -15,7 +17,7 @@
         
     }
 
-    function checkDomainEmail($domainToCheck){
+    public function checkDomainEmail($domainToCheck){
         $domains = ["gmail", "libero", "aruba", "tin", "outlook", 
         "virgilio", "hotmail"];
 
@@ -32,7 +34,7 @@
         return $check;  
     }
 
-    function checkCountryEmail($emailToCheck){
+    public function checkCountryEmail($emailToCheck){
         $countries = ["it","com", "net", "de", "es", 
         "gb", "fr"];
 
@@ -48,11 +50,11 @@
         return $check; 
     }
 
-    function checkString($string){
+    public function checkString($string){
         if(strlen($string) <4 || empty(trim($string)) || is_numeric($string) || is_null($string)) { 
-            exit("Valore non valido");
+            throw new Exception("Valore non valido");
         }
         return true;
     }
-
+}
 ?>
