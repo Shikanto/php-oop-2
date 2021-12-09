@@ -1,9 +1,11 @@
 <?php
 
-include __DIR__ . "/../generalFunction.php";
-include 'Creditcard.php';
+include_once __DIR__ . "/GeneralFunction.php";
 
 class User {
+
+    use GeneralFunction;
+
     private $userName = "";
     protected $password = "";
     private $email ="";
@@ -12,24 +14,39 @@ class User {
     
 
     function __construct($_userName, $_password, $_email){
-        $this -> setUserName($_userName);
-        $this -> setPassword($_password);
-        $this -> setEmail($_email);
-    
+        
+        try{
+            $this -> setUserName($_userName);
+        } catch(Exception $e) {
+            echo "Errore: " . $e-> getMessage() . "<br>";
+        }
+        
+        try{
+            $this -> setPassword($_password);
+        }catch(Exception $e) {
+            echo "C'è stato un problema: " . $e -> getMessage() . "<br>";
+        }
+        
+        try{
+            $this -> setEmail($_email);
+        }catch(Exception $e) {
+            echo "C'è un errore: " . $e -> getMessage() . "<br>";
+        }
     }
 
 
 /****************** FUNZIONI SET ****************/
 
     public function setUserName($newUserName) {
-        checkString($newUserName);
+        $this->checkString($newUserName);
         $this -> userName = $newUserName;
     }
 
     public function setPassword($newPassword) {
         
-        if (is_null($newPassword) || is_numeric($newPassword) || strlen($newPassword) < 8 || checkSpecialCar($newPassword) === "false" ) {
-            exit ("Errore nell'impostazione della password");
+        if (is_null($newPassword) || is_numeric($newPassword) || strlen($newPassword) < 8 || $this->checkSpecialCar($newPassword) === "false" ) {
+            throw new Exception("Errore nell'impostazione della password");
+             
         }
 
         $this -> password = $newPassword;
@@ -38,32 +55,32 @@ class User {
     public function setEmail($newEmail) {
 
         if (strlen($newEmail)<8) {
-            exit("Email non valida, length < 8");
+            throw new Exception("Email non valida, length < 8");
         }
         if (!strstr($newEmail, '@')) {
-            exit("Email non valida, miss @");
+            throw new Exception("Email non valida, miss @");
         }
 
         $domainEmail = substr($newEmail, strpos($newEmail, "@") + 1);
         var_dump(($domainEmail));
 
         if (!strpos($domainEmail, '.')){
-            exit("Email non valida, miss dot after @");
+            throw new Exception("Email non valida, miss dot after @");
         }
 
         $domain = substr($domainEmail, strpos($domainEmail, "@"), strpos($domainEmail, "."));
         var_dump($domain);
 
-        if (checkDomainEmail($domain) === "false") {
+        if ($this->checkDomainEmail($domain) === "false") {
 
-            exit("Email non valida, domain unknown");
+            throw new Exception("Email non valida, domain unknown");
         }
 
         $countryEmail = substr($domainEmail, strpos($domainEmail, ".") + 1);
         var_dump($countryEmail);
         
-        if (checkCountryEmail($countryEmail) === "false") {
-            exit("Email non valida, country unknown");
+        if ($this->checkCountryEmail($countryEmail) === "false") {
+            throw new Exception("Email non valida, country unknown");
         }
 
         $this -> email = $newEmail;

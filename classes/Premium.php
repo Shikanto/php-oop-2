@@ -11,7 +11,7 @@ class Premium extends User {
         $lowerCheckLevel = strtolower($checkLevel);
 
         if (!in_array($lowerCheckLevel, $allLevel)) {
-            exit ('livello non valido');
+            throw new Exception ('livello non valido');
         } else {
             return $this-> level = ucfirst($lowerCheckLevel);
         };
@@ -29,7 +29,7 @@ class Premium extends User {
         $lowerLevel = strtolower($level);
 
         if($lowerLevel === ""){
-            exit("Mi dispiace ma non hai diritto a nessuno sconto");
+            throw new Exception("Mi dispiace ma non hai diritto a nessuno sconto");
             
         };
         

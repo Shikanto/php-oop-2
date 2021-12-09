@@ -1,15 +1,25 @@
 <?php
 
 class Creditcard extends User{
- 
+
     protected $numberCard = "";
     protected $expireDate = "";
     
     
 
     function __construct($_numberCard, $_expireDate){
-        $this -> setCreditCardNumber($_numberCard);
-        $this -> setExpireDate($_expireDate);
+        try{
+            $this -> setCreditCardNumber($_numberCard);
+        }catch(Exception $e){
+            echo "Errore: " . $e->getMessage() . "<br>";
+        }
+
+        try{
+            $this -> setExpireDate($_expireDate);
+        }catch(Exception $e){
+            echo "Errore: " . $e->getMessage() . "<br>";
+        }
+
     }
     
     public function setCreditCardNumber($setNumberCard) {
@@ -17,7 +27,7 @@ class Creditcard extends User{
         $checkNumberCard = str_replace(' ', '', $setNumberCard);
 
         if (strlen($checkNumberCard) <= 15) {
-            exit ("Carta di credito non valida, numeri insufficienti");
+            throw new Exception ("Carta di credito non valida, numeri insufficienti");
         }
 
         return $this -> numberCard = $setNumberCard;
@@ -35,7 +45,7 @@ class Creditcard extends User{
         
 
         if($newExpireDate  < $date_now){
-            exit ("Carta di credito scaduta");
+            throw new Exception ("Carta di credito scaduta");
         }
 
         

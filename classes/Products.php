@@ -3,6 +3,8 @@
 
     class Products {
         
+        use GeneralFunction; 
+
         public $img = "";
         public $name = "";
         public $price = "";
@@ -14,13 +16,13 @@
 
         public function setNameProduct($productName){
             var_dump($productName);
-            checkString($productName);
+            $this->checkString($productName);
             $this -> name = $productName;
         }
 
         public function setPriceProduct($productPrice) {
             if(!ctype_digit($productPrice)){
-                exit("Prezzo prodotto non valido");
+                throw new Exception("Prezzo prodotto non valido");
             }
 
             $this -> price = $productPrice . ' €';
@@ -28,10 +30,10 @@
         
         public function setDescriptionProduct($productDescription) {
             
-            checkString($productDescription);
+            $this->checkString($productDescription);
             
             if(strlen($productDescription) <= 15){
-                exit("Descrizione prodotto troppo corta");
+                throw new Exception("Descrizione prodotto troppo corta");
             }
 
             $this -> description = $productDescription;
